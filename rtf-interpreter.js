@@ -366,6 +366,14 @@ class RTFInterpreter extends Writable {
     this.doc.marginBottom = value
   }
 
+// special characters
+  ctrl$lquote (value) {
+    this.group.addContent(new RTFSpan({ value: '\u2018' }))
+  }
+  ctrl$rquote (value) {
+    this.group.addContent(new RTFSpan({ value: '\u2019' }))
+  }
+
 // unsupported (and we need to ignore content)
   ctrl$stylesheet (value) {
     this.group.ignorable = true
