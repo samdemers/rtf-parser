@@ -241,6 +241,9 @@ class RTFInterpreter extends Writable {
   ctrl$culi (value) {
     this.group.style.indent = value * 100
   }
+  ctrl$sl (value) {
+    this.group.style.linespacing = value
+  }
 
 // encodings
   ctrl$ansi () {
