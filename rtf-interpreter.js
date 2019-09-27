@@ -15,6 +15,11 @@ const codeToCP = {
   0: 'ASCII',
   2: 'SYMBOL',
   77: 'MacRoman',
+  85: 'MacGreek',
+  86: 'MacTurkish',
+  87: 'MacThai',
+  88: 'MacCenteuro',
+  89: 'MacCyrillic',
   128: 'SHIFT_JIS',
   129: 'CP949', // Hangul
   130: 'JOHAB',
@@ -30,6 +35,18 @@ const codeToCP = {
   222: 'CP874', // thai
   238: 'CP238', // eastern european
   254: 'CP437' // PC-437
+}
+const macCP = {
+  10082: 'MacCroatian',
+  10007: 'MacCyrillic',
+  10006: 'MacGreek',
+  10079: 'MacIceland',
+  10000: 'MacRoman',
+  10010: 'MacRomania',
+  10021: 'MacThai',
+  10081: 'MacTurkish',
+  10017: 'MacUkraine',
+  10029: 'MacCentEuro'
 }
 
 class RTFInterpreter extends Writable {
@@ -239,10 +256,12 @@ class RTFInterpreter extends Writable {
     this.group.charset = 'CP850'
   }
   ctrl$ansicpg (codepage) {
-    if (availableCP.indexOf(codepage) === -1) {
-      this.emit('error', new Error('Codepage ' + codepage + ' is not available.'))
-    } else {
+    if (availableCP.indexOf(codepage) !== -1) {
       this.group.charset = 'CP' + codepage
+    } else if (codepage in macCP) {
+      this.group.charset = macCP[codepage]
+    } else {
+      this.emit('error', new Error('Codepage ' + codepage + ' is not available.'))
     }
   }
 
