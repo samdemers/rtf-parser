@@ -330,10 +330,9 @@ class RTFInterpreter extends Writable {
       } else {
         charset = codeToCP[code]
       }
-      if (charset == null) {
-        return this.emit('error', new Error('Unsupported charset code #' + code))
+      if (charset != null) {
+        this.group.get('currentFont').charset = charset
       }
-      this.group.get('currentFont').charset = charset
     }
   }
   ctrl$fprq (pitch) {
