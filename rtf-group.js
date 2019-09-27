@@ -26,7 +26,7 @@ class RTFGroup {
     this.style = {}
   }
   addContent (node) {
-    node.style = Object.assign({}, this.getStyle())
+    node.style = Object.assign({}, this.getStyle(), node.style)
     node.style.font = this.getFont(node.style.font)
     node.style.foreground = this.getColor(node.style.foreground)
     node.style.background = this.getColor(node.style.background)
