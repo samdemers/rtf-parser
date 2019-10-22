@@ -394,6 +394,12 @@ class RTFInterpreter extends Writable {
   ctrl$rquote (value) {
     this.group.addContent(new RTFSpan({ value: '\u2019' }))
   }
+  ctrl$endash (value) {
+    this.group.addContent(new RTFSpan({ value: '\u2013' }))
+  }
+  ctrl$emdash (value) {
+    this.group.addContent(new RTFSpan({ value: '\u2014' }))
+  }
 
 // unsupported (and we need to ignore content)
   ctrl$stylesheet (value) {
